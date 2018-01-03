@@ -5,3 +5,8 @@ alias mysql="docker run -it --link sysdocker_mysql_1:mysql --rm mysql sh -c 'exe
 alias mysqldump="docker exec sysdocker_mysql_1 sh -c 'exec mysqldump --all-databases -uroot --password=\"\$MYSQL_ROOT_PASSWORD\"'"
 
 alias psql="docker run -it --rm --link sysdocker_postgres_1:postgres postgres psql -h postgres -U postgres"
+
+# Serve the current working directory using the PHP built-in web server
+function phpS () {
+    docker run -it --rm -p8000:8000 -v $(pwd):/app sysdocker_php
+}
