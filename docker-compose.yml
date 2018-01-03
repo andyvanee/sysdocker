@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  mysql:
+    image: mysql
+    restart: always
+    network_mode: bridge
+    ports:
+      - 3306:3306
+    volumes:
+      - ${DOCKER_DATA_DIR}/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+
+  postgres:
+    image: postgres
+    restart: always
+    network_mode: bridge
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: ''
+      POSTGRES_USER: 'postgres'
+    volumes:
+      - ${DOCKER_DATA_DIR}/postgres:/var/lib/postgres
+
+  redis:
+    image: redis
+    restart: always
+    network_mode: bridge
+    ports:
+      - 6379:6379
+    volumes:
+      - ${DOCKER_DATA_DIR}/redis:/data
+
+  memcached:
+    image: 'memcached:alpine'
+    restart: always
+    network_mode: bridge
+    ports:
+      - 11211:11211
